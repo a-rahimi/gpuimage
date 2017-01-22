@@ -1,15 +1,15 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion COMPILE_SDK_VERSION as int
-    buildToolsVersion BUILD_TOOLS_VERSION
+    compileSdkVersion 23
+    buildToolsVersion "25.0.2"
 
     defaultConfig {
-        minSdkVersion MIN_SDK_VERSION as int
-        targetSdkVersion TARGET_SDK_VERSION as int
+        minSdkVersion 23
+        targetSdkVersion 23
 
-        versionCode = VERSION_CODE
-        versionName = VERSION_NAME
+        versionCode = 1
+        versionName = "ver"
 
         ndk {
             moduleName "gpuimage-library"
