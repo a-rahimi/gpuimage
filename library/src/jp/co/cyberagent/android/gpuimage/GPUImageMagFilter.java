@@ -53,7 +53,7 @@ public class GPUImageMagFilter extends GPUImageFilter {
             "     \n" +
             "     lowp float mag_distance = distance(vec2(magCr, magCb), vec2(maskCr, maskCb));\n" +
             "     lowp float blendValue = 1.0 - smoothstep(thresholdSensitivity, thresholdSensitivity + smoothing, mag_distance);\n" +
-            "     gl_FragColor = mix(textureColor, magColor, blendValue);\n" +
+            "     gl_FragColor = mix(textureColor, magColor, blendValue*0.7);\n" +
             " }";
 
     private int mThresholdSensitivityLocation;
