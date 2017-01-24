@@ -18,6 +18,7 @@ package jp.co.cyberagent.android.gpuimage;
 
 import android.graphics.PointF;
 import android.opengl.GLES20;
+import android.util.Log;
 
 public class GPUImageMagFilter extends GPUImageFilter {
     public static final String MAG_FRAGMENT_SHADER = " precision highp float;\n" +
@@ -108,6 +109,7 @@ public class GPUImageMagFilter extends GPUImageFilter {
      * The default value is 0.3
      */
     public void setThresholdSensitivity(final float thresholdSensitivity) {
+        Log.d("threshold", "set: " + thresholdSensitivity);
         mThresholdSensitivity = thresholdSensitivity;
         setFloat(mThresholdSensitivityLocation, mThresholdSensitivity);
     }

@@ -462,7 +462,7 @@ public class GPUImageFilterTools {
         private class MagAdjuster extends Adjuster<GPUImageMagFilter> {
             @Override
             public void adjust(final int percentage) {
-                getFilter().setThresholdSensitivity(range(percentage, 0, 1));
+                getFilter().setThresholdSensitivity(range(percentage, 0.f, 1.f));
             }
         }
 
