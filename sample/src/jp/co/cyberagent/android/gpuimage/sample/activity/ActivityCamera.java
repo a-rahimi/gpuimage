@@ -76,6 +76,8 @@ public class ActivityCamera extends Activity implements OnSeekBarChangeListener,
         if (!mCameraHelper.hasFrontCamera() || !mCameraHelper.hasBackCamera()) {
             cameraSwitchView.setVisibility(View.GONE);
         }
+
+        switchFilterTo(GPUImageFilterTools.defaultFilter(this));
     }
 
     @Override

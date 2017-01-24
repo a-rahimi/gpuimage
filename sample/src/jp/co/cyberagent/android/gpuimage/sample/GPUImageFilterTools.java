@@ -29,6 +29,10 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class GPUImageFilterTools {
+    public static GPUImageFilter defaultFilter(final Context context) {
+        return createFilterForType(context, FilterType.MAG);
+    }
+
     public static void showDialog(final Context context,
             final OnGpuImageFilterChosenListener listener) {
         final FilterList filters = new FilterList();
