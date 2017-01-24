@@ -33,19 +33,25 @@ public class GPUImageMagFilter extends GPUImageFilter {
             " void main()\n" +
             " {\n" +
             "     lowp vec4 textureColor = texture2D(inputImageTexture, textureCoordinate);\n" +
-            "     highp vec2 magCoordinate = vec2(0.5,0.5) + (textureCoordinate-vec2(0.5,0.5)) * magnification;\n" +
+            "     lowp vec2 magCoordinate = vec2(0.5,0.5) + (textureCoordinate-vec2(0.5,0.5)) * magnification;\n" +
             "     lowp vec4 magColor = texture2D(inputImageTexture, magCoordinate);\n" +
             "     \n" +
             "     float maskY = 0.2989 * colorToReplace.r + 0.5866 * colorToReplace.g + 0.1145 * colorToReplace.b;\n" +
             "     float maskCr = 0.7132 * (colorToReplace.r - maskY);\n" +
             "     float maskCb = 0.5647 * (colorToReplace.b - maskY);\n" +
             "     \n" +
-            "     float Y = 0.2989 * magColor.r + 0.5866 * magColor.g + 0.1145 * magColor.b;\n" +
-            "     float Cr = 0.7132 * (magColor.r - Y);\n" +
-            "     float Cb = 0.5647 * (magColor.b - Y);\n" +
+            "     float magY = 0.2989 * magColor.r + 0.5866 * magColor.g + 0.1145 * magColor.b;\n" +
+            "     float magCr = 0.7132 * (magColor.r - magY);\n" +
+            "     float magCb = 0.5647 * (magColor.b - magY);\n" +
             "     \n" +
-            "     float colord = distance(vec2(Cr, Cb), vec2(maskCr, maskCb));\n" +
-            "     float blendValue = 1.0 - smoothstep(thresholdSensitivity, thresholdSensitivity + smoothing, colord);\n" +
+            "     float Y = 0.2989 * textureColor.r + 0.5866 * textureColor.g + 0.1145 * textureColor.b;\n" +
+            "     float Cr = 0.7132 * (textureColor.r - Y);\n" +
+            "     float Cb = 0.5647 * (textureColor.b - Y);\n" +
+            "     lowp float my_distance = distance(vec2(Cr, Cb), vec2(maskCr, maskCb));\n" +
+            "     textureColor *= step(thresholdSensitivity, my_distance);\n" +
+            "     \n" +
+            "     lowp float mag_distance = distance(vec2(magCr, magCb), vec2(maskCr, maskCb));\n" +
+            "     lowp float blendValue = 1.0 - smoothstep(thresholdSensitivity, thresholdSensitivity + smoothing, mag_distance);\n" +
             "     gl_FragColor = mix(textureColor, magColor, blendValue);\n" +
             " }";
 
